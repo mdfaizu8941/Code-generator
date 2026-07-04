@@ -1,0 +1,49 @@
+const express = require('express');
+const cors = require('cors');
+const helmet = require('helmet');
+const rateLimit = require('express-rate-limit');
+const dotenv = require('dotenv');
+const connectDB = require('./config/db');
+
+const mongoSanitize = require('express-mongo-sanitize');
+const { errorHandler, notFound } = require('./middleware/errorMiddleware');
+
+// Load env vars
+dotenv.config();
+
+// Connect to Database
+connectDB();
+
+const app = express();
+
+// Security Middlewares
+app.use(helmet());
+app.use(cors({ origin: ['http://localhost:5173', 'http://localhost:5180', process.env.FRONTEND_URL], credentials: true }));
+app.use((req, res, next) => {
+  if (req.body) mongoSanitize.sanitize(req.body);
+  if (req.params) mongoSanitize.sanitize(req.params);
+  next();
+});
+
+// Rate Limiting
+const limiter = rateLimit({
+  windowMs: 15 * 60 * 1000, // 15 minutes
+  max: 100, // limit each IP to 100 requests per windowMs
+});
+app.use('/api', limiter);
+
+// Body parser
+app.use(express.json());
+
+// Mount Routes
+app.use('/api/auth', require('./routes/authRoutes'));
+app.use('/api/generate', require('./routes/generateRoutes'));
+app.use('/api/snippets', require('./routes/snippetRoutes'));
+
+// Error handling middleware
+app.use(notFound);
+app.use(errorHandler);
+
+const PORT = process.env.PORT || 5000;
+
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
