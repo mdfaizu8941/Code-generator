@@ -30,7 +30,7 @@ app.use(cors({
 }));
 
 // Pre-flight requests
-app.options('*', cors());
+app.options(/.*/, cors());
 app.use((req, res, next) => {
   if (req.body) mongoSanitize.sanitize(req.body);
   if (req.params) mongoSanitize.sanitize(req.params);
