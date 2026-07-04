@@ -52,6 +52,11 @@ app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/generate', require('./routes/generateRoutes'));
 app.use('/api/snippets', require('./routes/snippetRoutes'));
 
+// Root / Health check route
+app.get('/', (req, res) => {
+  res.status(200).json({ success: true, message: 'API is running' });
+});
+
 // Error handling middleware
 app.use(notFound);
 app.use(errorHandler);
