@@ -108,40 +108,46 @@ const Register = () => {
   };
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden bg-[#FAFAFA]">
+    <div className="min-h-screen flex relative overflow-hidden bg-transparent">
       
       {/* Decorative Background Elements */}
       <div className="absolute top-[-10%] right-[-10%] w-[40%] h-[40%] rounded-full bg-secondary/20 blur-[100px] pointer-events-none" />
       <div className="absolute bottom-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[100px] pointer-events-none" />
 
       {/* Left Side Image/Hero for Desktop */}
-      <div className="hidden lg:block relative w-0 flex-1 bg-gray-900 dark:bg-white z-10">
-        <div className="absolute inset-0 h-full w-full object-cover bg-gradient-to-tr from-gray-900 dark:from-gray-100 to-black p-12 flex flex-col justify-center">
+      <div className="hidden lg:flex relative w-0 flex-1 bg-white/40 backdrop-blur-md z-10 overflow-hidden items-center justify-center border-r border-white/50">
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-0 right-0 w-full h-full bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-blue-100/40 via-white/20 to-transparent"/>
+          <div className="absolute bottom-0 left-0 w-full h-full bg-[radial-gradient(ellipse_at_bottom_left,_var(--tw-gradient-stops))] from-purple-100/40 via-transparent to-transparent"/>
+        </div>
+        
+        <div className="relative z-20 w-full max-w-2xl px-12 ml-auto mr-12">
           <motion.div 
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.2, duration: 0.8 }}
-            className="max-w-2xl text-white ml-auto mr-12"
           >
-            <div className="inline-flex items-center px-3 py-1 rounded-full bg-white dark:bg-gray-900 dark:bg-white/10 border border-white/20 text-sm font-medium text-purple-200 mb-6 backdrop-blur-md">
-              <span className="flex h-2 w-2 rounded-full bg-purple-400 mr-2 animate-pulse"></span>
+            <div className="inline-flex items-center px-4 py-2 rounded-full bg-purple-50 border border-purple-100 text-sm font-semibold text-purple-700 mb-8 shadow-sm">
+              <span className="flex h-2 w-2 rounded-full bg-purple-600 mr-2 animate-pulse"></span>
               Join to be the Developer
             </div>
-            <h1 className="text-5xl font-bold mb-6 leading-tight">
-              Stop writing boilerplate. <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-400 to-primary">Start innovating.</span>
+            
+            <h1 className="text-5xl lg:text-6xl font-extrabold mb-6 leading-tight text-gray-900 tracking-tight">
+              Stop writing boilerplate. <br/> <span className="text-transparent bg-clip-text bg-gradient-to-r from-purple-600 to-blue-600">Start innovating.</span>
             </h1>
-            <p className="text-xl text-gray-400 dark:text-gray-500 mb-12 max-w-xl leading-relaxed">
+            
+            <p className="text-lg text-gray-600 mb-12 max-w-xl leading-relaxed font-medium">
               Create your free account today and get access to our advanced AI code generation models, cloud sync, and premium templates.
             </p>
             
             <div className="grid grid-cols-2 gap-6">
-              <div className="glass-panel p-4 rounded-xl bg-white dark:bg-gray-900 dark:bg-white/5 border border-white/10">
-                <div className="text-3xl font-bold text-white mb-1">10x</div>
-                <div className="text-sm text-gray-400 dark:text-gray-500">Faster Development</div>
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-xl border border-gray-200 shadow-xl shadow-gray-200/50">
+                <div className="text-4xl font-extrabold text-gray-900 mb-2">10x</div>
+                <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Faster Development</div>
               </div>
-              <div className="glass-panel p-4 rounded-xl bg-white dark:bg-gray-900 dark:bg-white/5 border border-white/10">
-                <div className="text-3xl font-bold text-white mb-1">99%</div>
-                <div className="text-sm text-gray-400 dark:text-gray-500">Code Accuracy</div>
+              <div className="p-6 rounded-2xl bg-white/80 backdrop-blur-xl border border-gray-200 shadow-xl shadow-gray-200/50">
+                <div className="text-4xl font-extrabold text-gray-900 mb-2">99%</div>
+                <div className="text-sm font-semibold text-gray-500 uppercase tracking-wider">Code Accuracy</div>
               </div>
             </div>
           </motion.div>
@@ -155,7 +161,7 @@ const Register = () => {
             <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-primary to-secondary flex items-center justify-center shadow-lg shadow-primary/30">
               <Code2 className="h-6 w-6 text-white" />
             </div>
-            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 dark:from-gray-100 to-gray-600 dark:to-gray-400">CodeGen AI</span>
+            <span className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-gray-900 to-gray-600">CodeGen AI</span>
           </div>
 
           <AnimatePresence mode="wait">
@@ -167,23 +173,23 @@ const Register = () => {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Create account</h2>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-500 mb-8">
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Create account</h2>
+                <p className="mt-2 text-sm text-gray-500 mb-8">
                   Start building software faster than ever.
                 </p>
 
                 <div className="mt-8">
                   <form onSubmit={handleDetailsSubmit} className="space-y-5">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-600 mb-1.5">Full Name</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Full Name</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <User className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                          <User className="h-5 w-5 text-gray-400" />
                         </div>
                         <input
                           type="text"
                           required
-                          className="input-field pl-10 bg-white dark:bg-gray-900 dark:bg-white border-gray-200 dark:border-gray-800 shadow-sm py-2.5"
+                          className="input-field pl-10 bg-white border-gray-200 shadow-sm py-2.5"
                           value={name}
                           onChange={(e) => setName(e.target.value)}
                           placeholder="John Doe"
@@ -192,15 +198,15 @@ const Register = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-600 mb-1.5">Email</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                          <Mail className="h-5 w-5 text-gray-400" />
                         </div>
                         <input
                           type="email"
                           required
-                          className="input-field pl-10 bg-white dark:bg-gray-900 dark:bg-white border-gray-200 dark:border-gray-800 shadow-sm py-2.5"
+                          className="input-field pl-10 bg-white border-gray-200 shadow-sm py-2.5"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="you@example.com"
@@ -209,22 +215,22 @@ const Register = () => {
                     </div>
 
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-600 mb-1.5">Password</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Password</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                          <Lock className="h-5 w-5 text-gray-400" />
                         </div>
                         <input
                           type="password"
                           required
                           minLength={6}
-                          className="input-field pl-10 bg-white dark:bg-gray-900 dark:bg-white border-gray-200 dark:border-gray-800 shadow-sm py-2.5"
+                          className="input-field pl-10 bg-white border-gray-200 shadow-sm py-2.5"
                           value={password}
                           onChange={(e) => setPassword(e.target.value)}
                           placeholder="••••••••"
                         />
                       </div>
-                      <p className="mt-2 text-xs text-gray-500 dark:text-gray-500">Must be at least 6 characters long.</p>
+                      <p className="mt-2 text-xs text-gray-500">Must be at least 6 characters long.</p>
                     </div>
 
                     <div className="pt-4">
@@ -240,7 +246,7 @@ const Register = () => {
                     </div>
                   </form>
 
-                  <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
+                  <p className="mt-8 text-center text-sm text-gray-600">
                     Already have an account?{' '}
                     <Link to="/login" className="font-semibold text-primary hover:text-primary-hover">
                       Sign in
@@ -256,12 +262,12 @@ const Register = () => {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 mb-6 mx-auto lg:mx-0">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 mb-6 mx-auto lg:mx-0">
                   <ShieldCheck className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight text-center lg:text-left">Check your email</h2>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-500 mb-8 text-center lg:text-left">
-                  We sent a 6-digit verification code to <span className="font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-700">{email}</span>. Valid for 5 minutes.
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight text-center lg:text-left">Check your email</h2>
+                <p className="mt-2 text-sm text-gray-500 mb-8 text-center lg:text-left">
+                  We sent a 6-digit verification code to <span className="font-semibold text-gray-800">{email}</span>. Valid for 5 minutes.
                 </p>
 
                 <form onSubmit={handleOtpSubmit} className="space-y-6">
@@ -275,7 +281,7 @@ const Register = () => {
                         value={digit}
                         onChange={(e) => handleOtpChange(index, e.target.value)}
                         onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                        className="w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold border-2 border-gray-200 dark:border-gray-800 rounded-xl focus:border-primary focus:ring-0 bg-white dark:bg-gray-900 dark:bg-white shadow-sm transition-colors text-gray-900 dark:text-white"
+                        className="w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold border-2 border-gray-200 rounded-xl focus:border-primary focus:ring-0 bg-white shadow-sm transition-colors text-gray-900"
                       />
                     ))}
                   </div>
@@ -290,12 +296,12 @@ const Register = () => {
                 </form>
 
                 <div className="mt-8 text-center flex flex-col items-center gap-3 text-sm">
-                  <p className="text-gray-500 dark:text-gray-500">Didn't receive the code?</p>
+                  <p className="text-gray-500">Didn't receive the code?</p>
                   <button 
                     type="button"
                     onClick={handleResendOtp}
                     disabled={countdown > 0 || isLoading}
-                    className="flex items-center gap-2 font-semibold text-primary hover:text-primary-hover disabled:text-gray-400 dark:text-gray-500 disabled:cursor-not-allowed transition-colors"
+                    className="flex items-center gap-2 font-semibold text-primary hover:text-primary-hover disabled:text-gray-400 disabled:cursor-not-allowed transition-colors"
                   >
                     <RefreshCw className={`w-4 h-4 ${isLoading && countdown === 0 ? 'animate-spin' : ''}`} />
                     {countdown > 0 ? `Resend code in ${countdown}s` : 'Click to resend'}
@@ -303,7 +309,7 @@ const Register = () => {
                   
                   <button
                     onClick={() => setStep(1)}
-                    className="mt-4 text-gray-500 dark:text-gray-500 hover:text-gray-800 dark:hover:text-gray-200 dark:text-gray-200 dark:text-gray-700 underline transition-colors"
+                    className="mt-4 text-gray-500 hover:text-gray-800 :text-gray-200 underline transition-colors"
                   >
                     Change email address
                   </button>

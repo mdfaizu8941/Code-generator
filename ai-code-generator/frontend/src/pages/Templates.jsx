@@ -11,8 +11,8 @@ const templates = [
     prompt: 'Build a secure RESTful API using Express and MongoDB. Include User authentication (register, login, JWT middleware) and a full CRUD route for a "Product" resource with title, description, price, and category fields. Add proper error handling and validation.',
     icon: Server,
     color: 'text-blue-500',
-    bg: 'bg-blue-50 dark:bg-blue-900/30',
-    border: 'border-blue-100 dark:border-blue-800/50',
+    bg: 'bg-blue-50 ',
+    border: 'border-blue-100 ',
     language: 'javascript',
     framework: 'express'
   },
@@ -59,7 +59,7 @@ const templates = [
     prompt: 'Create a robust React Context provider for Authentication. It should handle login, register, and logout async functions using axios. Include state for "user", "isAuthenticated", and "isLoading". Add a useEffect hook to check for an existing token in localStorage on mount and fetch the user profile if it exists.',
     icon: Shield,
     color: 'text-red-500',
-    bg: 'bg-red-50 dark:bg-red-900/20',
+    bg: 'bg-red-50 ',
     border: 'border-red-100',
     language: 'javascript',
     framework: 'react'
@@ -95,8 +95,8 @@ const Templates = () => {
     <Layout>
       <div className="h-full flex flex-col max-w-7xl mx-auto w-full">
         <div className="mb-8 text-center max-w-3xl mx-auto">
-          <h1 className="text-3xl font-bold text-gray-900 dark:text-white mb-4">Prompt Templates</h1>
-          <p className="text-lg text-gray-500 dark:text-gray-500">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Prompt Templates</h1>
+          <p className="text-lg text-gray-500">
             Kickstart your next project with our curated collection of expert-crafted AI prompts.
             Guaranteed to produce high-quality, production-ready code.
           </p>
@@ -109,25 +109,25 @@ const Templates = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: index * 0.1 }}
               key={template.id}
-              className={`bg-white dark:bg-gray-900 dark:bg-white rounded-2xl border ${template.border} p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col`}
+              className={`bg-white   rounded-2xl border ${template.border} p-6 shadow-sm hover:shadow-xl hover:-translate-y-1 transition-all flex flex-col`}
             >
               <div className="flex items-center gap-4 mb-4">
                 <div className={`p-3 rounded-xl ${template.bg}`}>
                   <template.icon className={`w-6 h-6 ${template.color}`} />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{template.title}</h3>
+                <h3 className="text-xl font-bold text-gray-900">{template.title}</h3>
               </div>
               
-              <p className="text-gray-600 dark:text-gray-400 dark:text-gray-500 mb-6 flex-1">
+              <p className="text-gray-600 mb-6 flex-1">
                 {template.description}
               </p>
               
               <div className="flex items-center gap-2 mb-6">
-                <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-600 text-xs font-bold rounded-lg uppercase tracking-wide">
+                <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-lg uppercase tracking-wide">
                   {template.language}
                 </span>
                 {template.framework !== 'none' && (
-                  <span className="px-2.5 py-1 bg-gray-100 dark:bg-gray-800 text-gray-700 dark:text-gray-300 dark:text-gray-600 text-xs font-bold rounded-lg uppercase tracking-wide">
+                  <span className="px-2.5 py-1 bg-gray-100 text-gray-700 text-xs font-bold rounded-lg uppercase tracking-wide">
                     {template.framework}
                   </span>
                 )}

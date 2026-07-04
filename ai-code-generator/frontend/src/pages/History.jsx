@@ -88,13 +88,13 @@ const History = () => {
       <div className="h-full flex flex-col">
         <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 mb-8 shrink-0">
           <div>
-            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">Saved Snippets</h1>
-            <p className="text-gray-500 dark:text-gray-500">View and manage your previously generated code.</p>
+            <h1 className="text-2xl font-bold text-gray-900">Saved Snippets</h1>
+            <p className="text-gray-500">View and manage your previously generated code.</p>
           </div>
           
           <div className="flex flex-col sm:flex-row gap-3">
             <div className="relative w-full sm:w-64">
-              <Search className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Search className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <input 
                 type="text" 
                 placeholder="Search snippets..." 
@@ -104,7 +104,7 @@ const History = () => {
               />
             </div>
             <div className="relative">
-              <Filter className="w-4 h-4 text-gray-400 dark:text-gray-500 absolute left-3 top-1/2 -translate-y-1/2" />
+              <Filter className="w-4 h-4 text-gray-400 absolute left-3 top-1/2 -translate-y-1/2" />
               <select 
                 value={language}
                 onChange={(e) => setLanguage(e.target.value)}
@@ -126,11 +126,11 @@ const History = () => {
           </div>
         ) : snippets.length === 0 ? (
           <div className="flex-1 flex flex-col items-center justify-center text-center">
-            <div className="w-24 h-24 bg-gray-100 dark:bg-gray-800 rounded-full flex items-center justify-center mb-6 shadow-inner">
-              <Code2 className="w-12 h-12 text-gray-300 dark:text-gray-600" />
+            <div className="w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-6 shadow-inner">
+              <Code2 className="w-12 h-12 text-gray-300" />
             </div>
-            <h3 className="text-2xl font-bold text-gray-800 dark:text-gray-200 dark:text-gray-700 mb-2">No snippets found</h3>
-            <p className="text-gray-500 dark:text-gray-500 max-w-sm mb-8">
+            <h3 className="text-2xl font-bold text-gray-800 mb-2">No snippets found</h3>
+            <p className="text-gray-500 max-w-sm mb-8">
               {search || language !== 'all' 
                 ? "Your search filters didn't match any saved snippets." 
                 : "You haven't saved any code snippets yet. Start building something amazing!"}
@@ -149,27 +149,27 @@ const History = () => {
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.2, delay: index * 0.03 }}
                   key={snippet._id}
-                  className="bg-white dark:bg-gray-900 dark:bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-primary/30 cursor-pointer group transition-all p-5 flex flex-col h-56"
+                  className="bg-white rounded-2xl border border-gray-100 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-primary/30 cursor-pointer group transition-all p-5 flex flex-col h-56"
                   onClick={() => setSelectedSnippet(snippet)}
                 >
                   <div className="flex justify-between items-start mb-3">
-                    <h3 className="font-bold text-lg text-gray-900 dark:text-white line-clamp-2 pr-2 leading-tight flex-1">
+                    <h3 className="font-bold text-lg text-gray-900 line-clamp-2 pr-2 leading-tight flex-1">
                       {snippet.title}
                     </h3>
                     <button 
                       onClick={(e) => handleToggleFavorite(snippet, e)}
-                      className={`p-2 -mr-2 -mt-2 rounded-full transition-colors ${snippet.isFavorite ? 'text-red-500 hover:bg-red-50 dark:bg-red-900/20' : 'text-gray-300 dark:text-gray-600 hover:text-red-400 hover:bg-gray-50 dark:hover:bg-gray-800 dark:bg-gray-950'}`}
+                      className={`p-2 -mr-2 -mt-2 rounded-full transition-colors ${snippet.isFavorite ? 'text-red-500 hover:bg-red-50 ' : 'text-gray-300  hover:text-red-400 hover:bg-gray-50 :bg-gray-800 '}`}
                     >
                       <Heart className={`w-5 h-5 ${snippet.isFavorite ? 'fill-current' : ''}`} />
                     </button>
                   </div>
                   
-                  <p className="text-sm text-gray-500 dark:text-gray-500 line-clamp-2 mb-auto">
+                  <p className="text-sm text-gray-500 line-clamp-2 mb-auto">
                     {snippet.prompt}
                   </p>
                   
                   <div className="flex items-center gap-2 mb-4 mt-4 flex-wrap">
-                    <span className="px-2.5 py-1 bg-indigo-50 dark:bg-indigo-900/30 text-indigo-700 dark:text-indigo-300 text-xs font-bold rounded-lg border border-indigo-100 dark:border-indigo-800/50">
+                    <span className="px-2.5 py-1 bg-indigo-50 text-indigo-700 text-xs font-bold rounded-lg border border-indigo-100">
                       {snippet.language}
                     </span>
                     {snippet.framework !== 'none' && (
@@ -180,15 +180,15 @@ const History = () => {
                   </div>
                   
                   <div className="flex items-center justify-between pt-4 border-t border-gray-50">
-                    <div className="flex items-center text-xs text-gray-400 dark:text-gray-500 font-medium">
+                    <div className="flex items-center text-xs text-gray-400 font-medium">
                       <Clock className="w-3.5 h-3.5 mr-1.5" />
                       {new Date(snippet.createdAt).toLocaleDateString()}
                     </div>
                     <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
-                      <button onClick={(e) => { e.stopPropagation(); handleDownload(snippet, e); }} className="p-1.5 text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-md">
+                      <button onClick={(e) => { e.stopPropagation(); handleDownload(snippet, e); }} className="p-1.5 text-gray-400 hover:text-gray-900 :text-white hover:bg-gray-100 :bg-gray-700 rounded-md">
                         <Download className="w-4 h-4" />
                       </button>
-                      <button onClick={(e) => handleDelete(snippet._id, e)} className="p-1.5 text-gray-400 dark:text-gray-500 hover:text-red-500 hover:bg-red-50 dark:bg-red-900/20 rounded-md">
+                      <button onClick={(e) => handleDelete(snippet._id, e)} className="p-1.5 text-gray-400 hover:text-red-500 hover:bg-red-50 rounded-md">
                         <Trash2 className="w-4 h-4" />
                       </button>
                     </div>
@@ -208,9 +208,9 @@ const History = () => {
           {selectedSnippet && (
             <div className="flex flex-col h-[70vh]">
               <div className="flex flex-wrap gap-4 items-start justify-between mb-6 shrink-0">
-                <div className="flex-1 bg-gray-50 dark:bg-gray-950 p-4 rounded-xl border border-gray-100">
-                  <p className="text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500 font-medium mb-1 uppercase tracking-wider text-xs">Original Prompt</p>
-                  <p className="text-gray-900 dark:text-white leading-relaxed">{selectedSnippet.prompt}</p>
+                <div className="flex-1 bg-gray-50 p-4 rounded-xl border border-gray-100">
+                  <p className="text-sm text-gray-600 font-medium mb-1 uppercase tracking-wider text-xs">Original Prompt</p>
+                  <p className="text-gray-900 leading-relaxed">{selectedSnippet.prompt}</p>
                 </div>
                 <div className="flex flex-col gap-2 shrink-0">
                   <button onClick={() => handleCopy(selectedSnippet.generatedCode)} className="btn-outline flex justify-center items-center gap-2">
@@ -219,13 +219,13 @@ const History = () => {
                   <button onClick={() => handleDownload(selectedSnippet)} className="btn-primary flex justify-center items-center gap-2">
                     <Download className="w-4 h-4" /> Download
                   </button>
-                  <button onClick={(e) => handleDelete(selectedSnippet._id, e)} className="btn-outline text-red-500 hover:bg-red-50 dark:bg-red-900/20 flex justify-center items-center gap-2 border-red-100">
+                  <button onClick={(e) => handleDelete(selectedSnippet._id, e)} className="btn-outline text-red-500 hover:bg-red-50 flex justify-center items-center gap-2 border-red-100">
                     <Trash2 className="w-4 h-4" /> Delete
                   </button>
                 </div>
               </div>
               
-              <div className="flex-1 border border-gray-200 dark:border-gray-800 rounded-xl overflow-hidden bg-[#FAFAFA]">
+              <div className="flex-1 border border-gray-200 rounded-xl overflow-hidden bg-[#FAFAFA]">
                 <Editor
                   height="100%"
                   language={selectedSnippet.language === 'c++' ? 'cpp' : selectedSnippet.language}

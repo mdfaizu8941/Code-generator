@@ -4,7 +4,7 @@ import { Code2, Zap, Save, Lock, Layout, ArrowRight, GitBranch } from 'lucide-re
 
 const LandingPage = () => {
   return (
-    <div className="min-h-screen bg-white dark:bg-gray-900 dark:bg-white">
+    <div className="min-h-screen bg-transparent">
       {/* Navigation */}
       <nav className="flex items-center justify-between p-6 max-w-7xl mx-auto">
         <div className="flex items-center gap-2">
@@ -12,7 +12,7 @@ const LandingPage = () => {
           <span className="text-xl font-bold">CodeGen AI</span>
         </div>
         <div className="flex items-center gap-4">
-          <Link to="/login" className="font-medium text-gray-600 dark:text-gray-400 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-white transition">Log in</Link>
+          <Link to="/login" className="font-medium text-gray-600 hover:text-gray-900 :text-white transition">Log in</Link>
           <Link to="/register" className="btn-primary">Get Started</Link>
         </div>
       </nav>
@@ -23,7 +23,7 @@ const LandingPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 dark:text-white mb-6"
+          className="text-5xl md:text-7xl font-extrabold tracking-tight text-gray-900 mb-6"
         >
           Generate Production-Ready <br className="hidden md:block" />
           <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">Code with AI</span>
@@ -32,7 +32,7 @@ const LandingPage = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.1 }}
-          className="text-xl text-gray-500 dark:text-gray-500 mb-10 max-w-2xl mx-auto"
+          className="text-xl text-gray-500 mb-10 max-w-2xl mx-auto"
         >
           Accelerate your development workflow. Describe what you need, choose your stack, and let our advanced AI write clean, maintainable code for you in seconds.
         </motion.p>
@@ -52,11 +52,11 @@ const LandingPage = () => {
       </section>
 
       {/* Features Section */}
-      <section id="features" className="py-24 bg-gray-50 dark:bg-gray-950 px-6">
+      <section id="features" className="py-24 bg-gray-50 px-6">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl font-bold mb-4">Everything you need to build faster</h2>
-            <p className="text-gray-500 dark:text-gray-500 max-w-2xl mx-auto">Our platform combines the power of AI with an intuitive interface, giving you the ultimate coding superpower.</p>
+            <p className="text-gray-500 max-w-2xl mx-auto">Our platform combines the power of AI with an intuitive interface, giving you the ultimate coding superpower.</p>
           </div>
           
           <div className="grid md:grid-cols-3 gap-8">
@@ -95,19 +95,19 @@ const LandingPage = () => {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-gray-200 dark:border-gray-800 py-12 px-6">
+      <footer className="border-t border-gray-200 py-12 px-6">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row justify-between items-center">
           <div className="flex items-center gap-2 mb-4 md:mb-0">
             <Code2 className="w-6 h-6 text-primary" />
-            <span className="font-bold text-gray-900 dark:text-white">CodeGen AI</span>
+            <span className="font-bold text-gray-900">CodeGen AI</span>
           </div>
-          <div className="flex gap-6 text-gray-500 dark:text-gray-500 text-sm">
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white dark:text-white">About</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white dark:text-white">Privacy</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white dark:text-white">Terms</a>
-            <a href="#" className="hover:text-gray-900 dark:hover:text-white dark:text-white">Contact</a>
+          <div className="flex gap-6 text-gray-500 text-sm">
+            <a href="#" className="hover:text-gray-900 :text-white">About</a>
+            <a href="#" className="hover:text-gray-900 :text-white">Privacy</a>
+            <a href="#" className="hover:text-gray-900 :text-white">Terms</a>
+            <a href="#" className="hover:text-gray-900 :text-white">Contact</a>
           </div>
-          <div className="mt-4 md:mt-0 text-sm text-gray-400 dark:text-gray-500">
+          <div className="mt-4 md:mt-0 text-sm text-gray-400">
             &copy; {new Date().getFullYear()} CodeGen AI. All rights reserved.
           </div>
         </div>
@@ -118,12 +118,12 @@ const LandingPage = () => {
 
 const FeatureCard = ({ icon, title, description }) => {
   return (
-    <div className="bg-white dark:bg-gray-900 dark:bg-white p-6 rounded-2xl border border-gray-100 shadow-sm hover:shadow-md transition-shadow">
-      <div className="w-12 h-12 bg-blue-50 dark:bg-blue-900/30 rounded-xl flex items-center justify-center mb-4">
+    <div className="bg-white dark:bg-gray-800 p-6 rounded-2xl border border-gray-100 dark:border-gray-700 shadow-sm hover:shadow-md transition-shadow">
+      <div className="w-12 h-12 bg-blue-50 dark:bg-gray-700 rounded-xl flex items-center justify-center mb-4">
         {icon}
       </div>
       <h3 className="text-xl font-bold mb-2">{title}</h3>
-      <p className="text-gray-500 dark:text-gray-500">{description}</p>
+      <p className="text-gray-600 dark:text-gray-400">{description}</p>
     </div>
   );
 };

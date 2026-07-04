@@ -128,11 +128,11 @@ const Dashboard = () => {
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: i * 0.1 }}
-              className="bg-white dark:bg-gray-900 dark:bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center justify-between"
+              className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center justify-between"
             >
               <div>
-                <p className="text-sm font-medium text-gray-500 dark:text-gray-500">{stat.label}</p>
-                <p className="text-2xl font-bold text-gray-900 dark:text-white mt-1">{stat.value}</p>
+                <p className="text-sm font-medium text-gray-500">{stat.label}</p>
+                <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
               </div>
               <div className={`p-3 rounded-xl ${stat.bg}`}>
                 <stat.icon className={`w-6 h-6 ${stat.color}`} />
@@ -147,7 +147,7 @@ const Dashboard = () => {
           {/* Left Column - Prompt & Settings */}
           <div className="lg:col-span-4 flex flex-col gap-6">
             <div className="card-container flex-1 flex flex-col">
-              <h2 className="text-lg font-bold text-gray-900 dark:text-white flex items-center mb-4">
+              <h2 className="text-lg font-bold text-gray-900 flex items-center mb-4">
                 <Settings2 className="w-5 h-5 mr-2 text-primary" />
                 Generation Setup
               </h2>
@@ -169,7 +169,7 @@ const Dashboard = () => {
 
               <textarea
                 ref={textareaRef}
-                className="input-field flex-1 resize-none mb-6 text-gray-700 dark:text-gray-300 dark:text-gray-600 leading-relaxed min-h-[150px]"
+                className="input-field flex-1 resize-none mb-6 text-gray-700 leading-relaxed min-h-[150px]"
                 placeholder="Describe the application you want to build... (e.g. A REST API for a todo list)"
                 value={prompt}
                 onChange={(e) => setPrompt(e.target.value)}
@@ -177,9 +177,9 @@ const Dashboard = () => {
               
               <div className="space-y-4 mb-6">
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-2">Language</label>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Language</label>
                   <select 
-                    className="input-field cursor-pointer bg-gray-50 dark:bg-gray-950"
+                    className="input-field cursor-pointer bg-gray-50"
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
                   >
@@ -189,9 +189,9 @@ const Dashboard = () => {
                   </select>
                 </div>
                 <div>
-                  <label className="block text-xs font-semibold text-gray-500 dark:text-gray-500 uppercase tracking-wider mb-2">Framework</label>
+                  <label className="block text-xs font-semibold text-gray-500 uppercase tracking-wider mb-2">Framework</label>
                   <select 
-                    className="input-field cursor-pointer bg-gray-50 dark:bg-gray-950"
+                    className="input-field cursor-pointer bg-gray-50"
                     value={framework}
                     onChange={(e) => setFramework(e.target.value)}
                   >
@@ -225,7 +225,7 @@ const Dashboard = () => {
           <div className="lg:col-span-8 card-container flex flex-col p-0 overflow-hidden">
             
             {/* Editor Tabs & Toolbar */}
-            <div className="h-14 border-b border-gray-100 bg-gray-50 dark:bg-gray-950/50 flex items-center justify-between px-2 shrink-0">
+            <div className="h-14 border-b border-gray-100 bg-gray-50 flex items-center justify-between px-2 shrink-0">
               <div className="flex items-center space-x-1">
                 {[
                   { id: 'code', icon: Code2, label: 'Code' },
@@ -235,8 +235,8 @@ const Dashboard = () => {
                     onClick={() => setActiveTab(tab.id)}
                     className={`flex items-center px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
                       activeTab === tab.id 
-                        ? 'bg-white dark:bg-gray-900 dark:bg-white text-primary shadow-sm ring-1 ring-gray-200' 
-                        : 'text-gray-500 dark:text-gray-500 hover:text-gray-900 dark:hover:text-white dark:text-white hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800'
+                        ? 'bg-white   text-primary shadow-sm ring-1 ring-gray-200' 
+                        : 'text-gray-500  hover:text-gray-900 :text-white  hover:bg-gray-100 :bg-gray-700 '
                     }`}
                   >
                     <tab.icon className={`w-4 h-4 mr-2 ${activeTab === tab.id ? 'text-primary' : ''}`} />
@@ -246,13 +246,13 @@ const Dashboard = () => {
               </div>
               
               <div className="flex items-center gap-1 pr-2">
-                <button onClick={handleCopy} disabled={!generatedCode} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:text-gray-600 hover:bg-gray-200 dark:bg-gray-700 rounded-lg transition disabled:opacity-50" title="Copy">
+                <button onClick={handleCopy} disabled={!generatedCode} className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-200 rounded-lg transition disabled:opacity-50" title="Copy">
                   {copied ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
                 </button>
-                <button onClick={handleSave} disabled={!generatedCode} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:text-gray-600 hover:bg-gray-200 dark:bg-gray-700 rounded-lg transition disabled:opacity-50" title="Save">
+                <button onClick={handleSave} disabled={!generatedCode} className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-200 rounded-lg transition disabled:opacity-50" title="Save">
                   <Save className="w-4 h-4" />
                 </button>
-                <button onClick={handleDownload} disabled={!generatedCode} className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-700 dark:text-gray-300 dark:text-gray-600 hover:bg-gray-200 dark:bg-gray-700 rounded-lg transition disabled:opacity-50" title="Download">
+                <button onClick={handleDownload} disabled={!generatedCode} className="p-2 text-gray-400 hover:text-gray-700 hover:bg-gray-200 rounded-lg transition disabled:opacity-50" title="Download">
                   <Download className="w-4 h-4" />
                 </button>
               </div>
@@ -264,13 +264,13 @@ const Dashboard = () => {
                 {isGenerating && (
                   <motion.div 
                     initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
-                    className="absolute inset-0 flex flex-col items-center justify-center bg-white dark:bg-gray-900 dark:bg-white/70 backdrop-blur-sm z-10"
+                    className="absolute inset-0 flex flex-col items-center justify-center bg-white backdrop-blur-sm z-10"
                   >
                     <div className="relative">
                       <div className="absolute inset-0 rounded-full blur-xl bg-primary/30 animate-pulse"></div>
                       <Code2 className="w-16 h-16 text-primary relative z-10 animate-bounce" />
                     </div>
-                    <p className="mt-6 text-gray-600 dark:text-gray-400 dark:text-gray-500 font-medium text-lg tracking-wide">Architecting your solution...</p>
+                    <p className="mt-6 text-gray-600 font-medium text-lg tracking-wide">Architecting your solution...</p>
                   </motion.div>
                 )}
               </AnimatePresence>

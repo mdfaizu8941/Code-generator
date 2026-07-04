@@ -62,6 +62,13 @@ exports.createSnippet = async (req, res, next) => {
     req.body.user = req.user.id;
     const snippet = await Snippet.create(req.body);
 
+    const User = require('../models/User');
+    const user = await User.findById(req.user.id);
+    if (user) {
+      user.stats.savedSnippetCount = (user.stats.savedSnippetCount || 0) + 1;
+      await user.save({ validateBeforeSave: false });
+    }
+
     res.status(201).json({
       success: true,
       data: snippet
@@ -118,6 +125,13 @@ exports.deleteSnippet = async (req, res, next) => {
     }
 
     await Snippet.deleteOne({ _id: req.params.id });
+
+    const User = require('../models/User');
+    const user = await User.findById(req.user.id);
+    if (user && user.stats.savedSnippetCount > 0) {
+      user.stats.savedSnippetCount -= 1;
+      await user.save({ validateBeforeSave: false });
+    }
 
     res.status(200).json({
       success: true,

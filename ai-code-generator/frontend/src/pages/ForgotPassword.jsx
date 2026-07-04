@@ -128,7 +128,7 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex relative overflow-hidden bg-[#FAFAFA]">
+    <div className="min-h-screen flex relative overflow-hidden bg-transparent">
       
       {/* Decorative Background Elements */}
       <div className="absolute top-[-10%] left-[-10%] w-[40%] h-[40%] rounded-full bg-primary/20 blur-[100px] pointer-events-none" />
@@ -146,23 +146,23 @@ const ForgotPassword = () => {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight">Forgot Password</h2>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-500 mb-8">
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight">Forgot Password</h2>
+                <p className="mt-2 text-sm text-gray-500 mb-8">
                   Enter your email address and we'll send you a code to reset your password.
                 </p>
 
                 <div className="mt-8">
                   <form onSubmit={handleEmailSubmit} className="space-y-5">
                     <div>
-                      <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-600 mb-1.5">Email</label>
+                      <label className="block text-sm font-semibold text-gray-700 mb-1.5">Email</label>
                       <div className="relative">
                         <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                          <Mail className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                          <Mail className="h-5 w-5 text-gray-400" />
                         </div>
                         <input
                           type="email"
                           required
-                          className="input-field pl-10 bg-white dark:bg-gray-900 dark:bg-white border-gray-200 dark:border-gray-800 shadow-sm py-2.5 w-full rounded-xl"
+                          className="input-field pl-10 bg-white border-gray-200 shadow-sm py-2.5 w-full rounded-xl"
                           value={email}
                           onChange={(e) => setEmail(e.target.value)}
                           placeholder="Enter your email"
@@ -183,7 +183,7 @@ const ForgotPassword = () => {
                     </div>
                   </form>
 
-                  <p className="mt-8 text-center text-sm text-gray-600 dark:text-gray-400 dark:text-gray-500">
+                  <p className="mt-8 text-center text-sm text-gray-600">
                     Remember your password?{' '}
                     <Link to="/login" className="font-semibold text-primary hover:text-primary-hover">
                       Back to login
@@ -201,12 +201,12 @@ const ForgotPassword = () => {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 dark:bg-blue-900/30 mb-6 mx-auto lg:mx-0">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-blue-50 mb-6 mx-auto lg:mx-0">
                   <ShieldCheck className="w-6 h-6 text-primary" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight text-center lg:text-left">Verification Code</h2>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-500 mb-8 text-center lg:text-left">
-                  We sent a 6-digit verification code to <span className="font-semibold text-gray-800 dark:text-gray-200 dark:text-gray-700">{email}</span>.
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight text-center lg:text-left">Verification Code</h2>
+                <p className="mt-2 text-sm text-gray-500 mb-8 text-center lg:text-left">
+                  We sent a 6-digit verification code to <span className="font-semibold text-gray-800">{email}</span>.
                 </p>
 
                 <form onSubmit={handleOtpSubmit} className="space-y-6">
@@ -220,7 +220,7 @@ const ForgotPassword = () => {
                         value={digit}
                         onChange={(e) => handleOtpChange(index, e.target.value)}
                         onKeyDown={(e) => handleOtpKeyDown(index, e)}
-                        className="w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold border-2 border-gray-200 dark:border-gray-800 rounded-xl focus:border-primary focus:outline-none bg-white dark:bg-gray-900 dark:bg-white shadow-sm transition-colors text-gray-900 dark:text-white"
+                        className="w-12 h-14 sm:w-14 sm:h-16 text-center text-2xl font-bold border-2 border-gray-200 rounded-xl focus:border-primary focus:outline-none bg-white shadow-sm transition-colors text-gray-900"
                       />
                     ))}
                   </div>
@@ -255,25 +255,25 @@ const ForgotPassword = () => {
                 exit={{ opacity: 0, x: 20 }}
                 transition={{ duration: 0.3 }}
               >
-                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-50 dark:bg-green-900/30 mb-6 mx-auto lg:mx-0">
+                <div className="flex items-center justify-center w-12 h-12 rounded-full bg-green-50 mb-6 mx-auto lg:mx-0">
                   <CheckCircle2 className="w-6 h-6 text-green-500" />
                 </div>
-                <h2 className="text-3xl font-extrabold text-gray-900 dark:text-white tracking-tight text-center lg:text-left">Set New Password</h2>
-                <p className="mt-2 text-sm text-gray-500 dark:text-gray-500 mb-8 text-center lg:text-left">
+                <h2 className="text-3xl font-extrabold text-gray-900 tracking-tight text-center lg:text-left">Set New Password</h2>
+                <p className="mt-2 text-sm text-gray-500 mb-8 text-center lg:text-left">
                   Please enter your new password below.
                 </p>
 
                 <form onSubmit={handlePasswordSubmit} className="space-y-5">
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-600 mb-1.5">New Password</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">New Password</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                        <Lock className="h-5 w-5 text-gray-400" />
                       </div>
                       <input
                         type="password"
                         required
-                        className="input-field pl-10 bg-white dark:bg-gray-900 dark:bg-white border-gray-200 dark:border-gray-800 shadow-sm py-2.5 w-full rounded-xl focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                        className="input-field pl-10 bg-white border-gray-200 shadow-sm py-2.5 w-full rounded-xl focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                         placeholder="••••••••"
@@ -282,15 +282,15 @@ const ForgotPassword = () => {
                   </div>
 
                   <div>
-                    <label className="block text-sm font-semibold text-gray-700 dark:text-gray-300 dark:text-gray-600 mb-1.5">Confirm Password</label>
+                    <label className="block text-sm font-semibold text-gray-700 mb-1.5">Confirm Password</label>
                     <div className="relative">
                       <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
-                        <Lock className="h-5 w-5 text-gray-400 dark:text-gray-500" />
+                        <Lock className="h-5 w-5 text-gray-400" />
                       </div>
                       <input
                         type="password"
                         required
-                        className="input-field pl-10 bg-white dark:bg-gray-900 dark:bg-white border-gray-200 dark:border-gray-800 shadow-sm py-2.5 w-full rounded-xl focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                        className="input-field pl-10 bg-white border-gray-200 shadow-sm py-2.5 w-full rounded-xl focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         placeholder="••••••••"
@@ -315,7 +315,7 @@ const ForgotPassword = () => {
       </div>
       
       {/* Right side styling - same as login */}
-      <div className="hidden lg:block lg:flex-1 relative overflow-hidden bg-gradient-to-br from-primary/10 via-white to-secondary/10 dark:from-primary/5 dark:via-gray-900 dark:to-secondary/5">
+      <div className="hidden lg:block lg:flex-1 relative overflow-hidden bg-gradient-to-br from-primary/10 via-white to-secondary/10">
         <div className="absolute inset-0 bg-grid-pattern opacity-[0.03]" />
         
         <div className="absolute top-[20%] right-[10%] w-72 h-72 bg-gradient-to-br from-primary/30 to-secondary/30 rounded-full blur-[80px]" />
@@ -327,17 +327,17 @@ const ForgotPassword = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
           >
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 dark:bg-gray-800/50 backdrop-blur-sm border border-gray-200/50 dark:border-gray-700/50 mb-8">
+            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/50 backdrop-blur-sm border border-gray-200/50 mb-8">
               <span className="flex h-2 w-2 rounded-full bg-green-500 animate-pulse"></span>
-              <span className="text-sm font-medium text-gray-700 dark:text-gray-300">Secure Recovery</span>
+              <span className="text-sm font-medium text-gray-700">Secure Recovery</span>
             </div>
             
-            <h1 className="text-5xl font-extrabold text-gray-900 dark:text-white leading-[1.1] mb-6 tracking-tight">
+            <h1 className="text-5xl font-extrabold text-gray-900 leading-[1.1] mb-6 tracking-tight">
               Regain access to your <br />
               <span className="text-transparent bg-clip-text bg-gradient-to-r from-primary to-secondary">AI workspace</span>
             </h1>
             
-            <p className="text-xl text-gray-600 dark:text-gray-400 leading-relaxed max-w-xl">
+            <p className="text-xl text-gray-600 leading-relaxed max-w-xl">
               We'll send a one-time verification code to your registered email address to securely reset your password.
             </p>
           </motion.div>

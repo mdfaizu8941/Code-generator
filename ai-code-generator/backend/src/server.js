@@ -60,6 +60,7 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/authRoutes'));
 app.use('/api/generate', require('./routes/generateRoutes'));
 app.use('/api/snippets', require('./routes/snippetRoutes'));
+app.use('/api/dashboard', require('./routes/dashboardRoutes'));
 
 // Root / Health check route
 app.get('/', (req, res) => {

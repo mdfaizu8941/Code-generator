@@ -29,8 +29,12 @@ const userSchema = new mongoose.Schema({
     defaultFramework: { type: String, default: 'none' }
   },
   stats: {
-    projectsGenerated: { type: Number, default: 0 },
-    tokensUsed: { type: Number, default: 0 }
+    totalGenerations: { type: Number, default: 0 },
+    generationsToday: { type: Number, default: 0 },
+    totalTokensUsed: { type: Number, default: 0 },
+    totalTimeSaved: { type: Number, default: 0 }, // in minutes
+    savedSnippetCount: { type: Number, default: 0 },
+    lastGenerationAt: { type: Date }
   }
 }, { timestamps: true });
 

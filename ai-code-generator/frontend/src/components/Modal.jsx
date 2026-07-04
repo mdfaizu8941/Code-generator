@@ -30,13 +30,13 @@ const Modal = ({ isOpen, onClose, title, children, maxWidth = 'max-w-2xl' }) => 
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.95, y: 20 }}
               transition={{ type: 'spring', damping: 25, stiffness: 300 }}
-              className={`bg-white dark:bg-gray-900 dark:bg-white rounded-2xl shadow-xl w-full ${maxWidth} max-h-[90vh] flex flex-col pointer-events-auto overflow-hidden`}
+              className={`bg-white   rounded-2xl shadow-xl w-full ${maxWidth} max-h-[90vh] flex flex-col pointer-events-auto overflow-hidden`}
             >
               <div className="flex items-center justify-between px-6 py-4 border-b border-gray-100 shrink-0">
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white">{title}</h3>
+                <h3 className="text-xl font-bold text-gray-900">{title}</h3>
                 <button
                   onClick={onClose}
-                  className="p-2 text-gray-400 dark:text-gray-500 hover:text-gray-600 dark:hover:text-gray-300 dark:text-gray-400 dark:text-gray-500 hover:bg-gray-100 dark:hover:bg-gray-700 dark:bg-gray-800 rounded-lg transition-colors"
+                  className="p-2 text-gray-400 hover:text-gray-600 :text-gray-300 hover:bg-gray-100 :bg-gray-700 rounded-lg transition-colors"
                 >
                   <X className="w-5 h-5" />
                 </button>
