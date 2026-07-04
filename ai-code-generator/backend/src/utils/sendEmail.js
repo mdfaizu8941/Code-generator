@@ -1,15 +1,7 @@
-const nodemailer = require('nodemailer');
+const { BrevoClient } = require('@getbrevo/brevo');
 
 const sendEmail = async (options) => {
-  // Create a transporter using Brevo SMTP
-  const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: process.env.SMTP_PORT,
-    auth: {
-      user: process.env.SMTP_USER,
-      pass: process.env.SMTP_PASS
-    }
-  });
+  const client = new BrevoClient({ apiKey: process.env.BREVO_API_KEY });
 
   const htmlTemplate = `
     <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto; padding: 20px; border: 1px solid #eaeaea; border-radius: 10px;">
@@ -29,32 +21,29 @@ const sendEmail = async (options) => {
     </div>
   `;
 
-  const message = {
-    from: `${process.env.FROM_NAME || 'CodeGen AI'} <${process.env.FROM_EMAIL}>`,
-    to: options.email,
-    subject: options.subject,
-    html: htmlTemplate
-  };
-
   try {
     console.log(`\n================================`);
-    console.log(`[TESTING MODE] OTP Email Skipped`);
+    console.log(`[EMAIL API] OTP Email Prepared`);
     console.log(`To: ${options.email}`);
     console.log(`OTP Code: ${options.otp}`);
     console.log(`================================\n`);
 
-    // We still attempt to send, but we catch the error and force a success
-    // so the app can continue working without crashing while the Brevo account is unactivated.
-    try {
-      await transporter.sendMail(message);
-    } catch (err) {
-      console.error(`Brevo SMTP Error: ${err.message} - Bypassing for testing.`);
-    }
-
+    const data = await client.transactionalEmails.sendTransacEmail({
+      subject: options.subject,
+      htmlContent: htmlTemplate,
+      sender: {
+        name: process.env.BREVO_SENDER_NAME || 'CodeGen AI',
+        email: process.env.BREVO_SENDER_EMAIL
+      },
+      to: [{ email: options.email }]
+    });
+    
+    console.log(`Brevo API Email sent successfully.`);
     return true;
   } catch (error) {
-    console.error(`Error in sendEmail utility: ${error}`);
-    return true; // Force return true so we don't block the user while testing
+    console.error(`Error in sendEmail utility using Brevo API: ${error}`);
+    // Return false to indicate failure, which the controller handles correctly
+    return false; 
   }
 };
 

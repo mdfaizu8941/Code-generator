@@ -81,6 +81,50 @@ export const AuthProvider = ({ children }) => {
     }
   };
 
+  const requestPasswordReset = async (email) => {
+    try {
+      const res = await api.post('/auth/forgot-password', { email });
+      toast.success(res.data.message || 'OTP sent successfully');
+      return true;
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Failed to send OTP');
+      return false;
+    }
+  };
+
+  const verifyPasswordResetOtp = async (email, otp) => {
+    try {
+      const res = await api.post('/auth/verify-reset-otp', { email, otp });
+      toast.success(res.data.message || 'OTP verified successfully');
+      return true;
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Invalid or expired OTP');
+      return false;
+    }
+  };
+
+  const resetPassword = async (email, otp, password) => {
+    try {
+      const res = await api.post('/auth/reset-password', { email, otp, password });
+      toast.success(res.data.message || 'Password reset successfully');
+      return true;
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Failed to reset password');
+      return false;
+    }
+  };
+
+  const resendPasswordResetOtp = async (email) => {
+    try {
+      const res = await api.post('/auth/resend-reset-otp', { email });
+      toast.success(res.data.message || 'OTP resent successfully');
+      return true;
+    } catch (error) {
+      toast.error(error.response?.data?.error || 'Failed to resend OTP');
+      return false;
+    }
+  };
+
   const logout = () => {
     localStorage.removeItem('token');
     setUser(null);
@@ -88,7 +132,10 @@ export const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{ user, loading, login, requestLoginOtp, register, requestRegisterOtp, logout, setUser }}>
+    <AuthContext.Provider value={{ 
+      user, loading, login, requestLoginOtp, register, requestRegisterOtp, logout, setUser,
+      requestPasswordReset, verifyPasswordResetOtp, resetPassword, resendPasswordResetOtp
+    }}>
       {children}
     </AuthContext.Provider>
   );

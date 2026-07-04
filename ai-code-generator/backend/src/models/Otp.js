@@ -14,10 +14,15 @@ const otpSchema = new mongoose.Schema({
     type: String,
     required: [true, 'Please add an OTP']
   },
+  purpose: {
+    type: String,
+    enum: ['VERIFICATION', 'PASSWORD_RESET'],
+    default: 'VERIFICATION'
+  },
   createdAt: {
     type: Date,
     default: Date.now,
-    expires: 300 // The document will be automatically deleted after 5 minutes (300 seconds)
+    expires: 600 // Increased from 5 to 10 minutes (600 seconds) for both cases as standard
   }
 });
 

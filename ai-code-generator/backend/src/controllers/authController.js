@@ -367,3 +367,102 @@ exports.verifyOtp = async (req, res) => {
     res.status(500).json({ success: false, error: error.message });
   }
 };
+
+// @desc    Request Password Reset OTP
+// @route   POST /api/auth/forgot-password
+// @access  Public
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) return res.status(400).json({ success: false, error: 'Please provide an email' });
+
+    const userExists = await User.findOne({ email });
+    // Generic success message to prevent email enumeration
+    const successMessage = 'If an account with this email exists, a password reset OTP has been sent.';
+
+    if (!userExists) {
+      return res.status(200).json({ success: true, message: successMessage });
+    }
+
+    const existingOtp = await Otp.findOne({ email, purpose: 'PASSWORD_RESET' }).sort({ createdAt: -1 });
+    if (existingOtp) {
+      const timeSinceLastOtp = (Date.now() - existingOtp.createdAt.getTime()) / 1000;
+      if (timeSinceLastOtp < 60) {
+        return res.status(429).json({ success: false, error: `Please wait ${Math.ceil(60 - timeSinceLastOtp)} seconds before requesting a new OTP.` });
+      }
+    }
+
+    const rawOtp = generateOtp(6);
+    await Otp.create({ email, otp: rawOtp, purpose: 'PASSWORD_RESET' });
+
+    const emailSent = await sendEmail({
+      email,
+      subject: 'Password Reset Verification',
+      otp: rawOtp
+    });
+
+    if (!emailSent) {
+      await Otp.deleteMany({ email, purpose: 'PASSWORD_RESET' });
+      return res.status(500).json({ success: false, error: 'Email could not be sent' });
+    }
+
+    res.status(200).json({ success: true, message: successMessage });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// @desc    Verify Password Reset OTP
+// @route   POST /api/auth/verify-reset-otp
+// @access  Public
+exports.verifyResetOtp = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) return res.status(400).json({ success: false, error: 'Please provide email and OTP' });
+
+    const otpRecord = await Otp.findOne({ email, purpose: 'PASSWORD_RESET' }).sort({ createdAt: -1 });
+    if (!otpRecord) return res.status(400).json({ success: false, error: 'Invalid or expired OTP' });
+
+    const isMatch = await otpRecord.matchOtp(otp);
+    if (!isMatch) return res.status(400).json({ success: false, error: 'Invalid or expired OTP' });
+
+    // Do NOT delete the OTP here, as we need it for the actual reset step.
+    res.status(200).json({ success: true, message: 'OTP verified successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// @desc    Reset Password
+// @route   POST /api/auth/reset-password
+// @access  Public
+exports.resetPassword = async (req, res) => {
+  try {
+    const { email, otp, password } = req.body;
+    if (!email || !otp || !password) return res.status(400).json({ success: false, error: 'Please provide all fields' });
+    if (password.length < 6) return res.status(400).json({ success: false, error: 'Password must be at least 6 characters' });
+
+    const otpRecord = await Otp.findOne({ email, purpose: 'PASSWORD_RESET' }).sort({ createdAt: -1 });
+    if (!otpRecord) return res.status(400).json({ success: false, error: 'Invalid or expired OTP' });
+
+    const isMatch = await otpRecord.matchOtp(otp);
+    if (!isMatch) return res.status(400).json({ success: false, error: 'Invalid or expired OTP' });
+
+    const user = await User.findOne({ email });
+    if (!user) return res.status(400).json({ success: false, error: 'User not found' });
+
+    user.password = password;
+    await user.save();
+
+    await Otp.deleteMany({ email, purpose: 'PASSWORD_RESET' });
+
+    res.status(200).json({ success: true, message: 'Password reset successfully' });
+  } catch (error) {
+    res.status(500).json({ success: false, error: error.message });
+  }
+};
+
+// @desc    Resend Password Reset OTP
+// @route   POST /api/auth/resend-reset-otp
+// @access  Public
+exports.resendResetOtp = exports.forgotPassword;
