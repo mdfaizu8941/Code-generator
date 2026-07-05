@@ -26,6 +26,9 @@ app.use(cors({
     if (
       origin === 'http://localhost:5173' || 
       origin === 'http://localhost:5180' || 
+      origin.startsWith('http://192.168.') ||
+      origin.startsWith('http://10.') ||
+      origin.startsWith('http://172.') ||
       origin === process.env.FRONTEND_URL || 
       origin.endsWith('.vercel.app')
     ) {

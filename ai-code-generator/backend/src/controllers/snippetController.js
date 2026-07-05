@@ -24,9 +24,10 @@ exports.getSnippets = async (req, res, next) => {
 
     // Search by title or prompt
     if (search) {
+      const escapedSearch = search.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
       query.$or = [
-        { title: { $regex: search, $options: 'i' } },
-        { prompt: { $regex: search, $options: 'i' } }
+        { title: { $regex: escapedSearch, $options: 'i' } },
+        { prompt: { $regex: escapedSearch, $options: 'i' } }
       ];
     }
 
