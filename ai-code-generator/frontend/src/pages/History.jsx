@@ -6,7 +6,7 @@ import api from '../services/api';
 import toast from 'react-hot-toast';
 import { Search, Code2, Clock, Trash2, ExternalLink, Heart, Download, Copy, Check, Filter } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { downloadFile, downloadZip } from '../utils/exportUtils';
 
 const languages = ['all', 'javascript', 'typescript', 'python', 'java', 'cpp', 'go', 'rust', 'sql'];
@@ -19,6 +19,15 @@ const History = () => {
   const [selectedSnippet, setSelectedSnippet] = useState(null);
   const [copied, setCopied] = useState(false);
   const navigate = useNavigate();
+  const location = useLocation();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const searchQuery = params.get('search');
+    if (searchQuery !== null) {
+      setSearch(searchQuery);
+    }
+  }, [location.search]);
 
   useEffect(() => {
     fetchSnippets();

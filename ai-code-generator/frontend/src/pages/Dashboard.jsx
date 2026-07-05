@@ -115,31 +115,7 @@ const Dashboard = () => {
     <Layout>
       <div className="flex flex-col h-full space-y-6">
         
-        {/* Analytics Row */}
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-4 shrink-0">
-          {[
-            { label: 'Generated Today', value: '12', icon: Zap, color: 'text-amber-500', bg: 'bg-amber-100' },
-            { label: 'Saved Snippets', value: '48', icon: Save, color: 'text-blue-500', bg: 'bg-blue-100' },
-            { label: 'Tokens Used', value: '124K', icon: BarChart3, color: 'text-emerald-500', bg: 'bg-emerald-100' },
-            { label: 'Time Saved', value: '14h', icon: Clock, color: 'text-purple-500', bg: 'bg-purple-100' },
-          ].map((stat, i) => (
-            <motion.div 
-              key={i} 
-              initial={{ opacity: 0, y: 10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.1 }}
-              className="bg-white rounded-2xl p-4 border border-gray-100 shadow-sm flex items-center justify-between"
-            >
-              <div>
-                <p className="text-sm font-medium text-gray-500">{stat.label}</p>
-                <p className="text-2xl font-bold text-gray-900 mt-1">{stat.value}</p>
-              </div>
-              <div className={`p-3 rounded-xl ${stat.bg}`}>
-                <stat.icon className={`w-6 h-6 ${stat.color}`} />
-              </div>
-            </motion.div>
-          ))}
-        </div>
+
 
         {/* Main Workspace Grid */}
         <div className="grid lg:grid-cols-12 gap-6 flex-1 min-h-[500px]">

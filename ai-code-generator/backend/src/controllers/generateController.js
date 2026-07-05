@@ -23,7 +23,7 @@ Structure your response clearly. Use markdown formatting.
 If the request is ambiguous, make reasonable assumptions for a premium, clean solution.`;
 
     const response = await ai.models.generateContent({
-        model: 'gemini-2.5-flash',
+        model: 'gemini-flash-latest',
         contents: prompt,
         config: {
             systemInstruction: systemInstruction,
@@ -81,7 +81,7 @@ If the request is ambiguous, make reasonable assumptions for a premium, clean so
       data: generatedCode
     });
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ success: false, error: 'Failed to generate code. Please try again later.' });
+    console.error('Generate Code Error:', error);
+    res.status(500).json({ success: false, error: 'Failed to generate code. Please try again later.', details: error.message, stack: error.stack });
   }
 };
